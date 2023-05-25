@@ -23,12 +23,16 @@ dotnet new sln --output $solutionPath
 
 Write-Output "Generate projects"
 # Create the projects
+# First project added becomes the startup project
+# If you want to use the newer style, remove the --use-program-main when generating the solution
+#dotnet new console --use-program-main -n $consoleProjectName -o "$sourcePath\$consoleProjectName"
+# With VS if you click on the Console.WriteLine and press ctrl + . it allows you to change it back to the old way.
+dotnet new console -n $consoleProjectName -o "$sourcePath\$consoleProjectName"
 dotnet new classlib -n $dataProjectName -o "$sourcePath\$dataProjectName"
 dotnet new classlib -n $repositoryProjectName -o "$sourcePath\$repositoryProjectName"
 dotnet new classlib -n $libraryProjectName -o "$sourcePath\$libraryProjectName"
 dotnet new webapi -n $apiProjectName -o "$sourcePath\$apiProjectName"
 dotnet new classlib -n $gatewayProjectName -o "$sourcePath\$gatewayProjectName"
-dotnet new console -n $consoleProjectName -o "$sourcePath\$consoleProjectName"
 dotnet new wpf -n $wpfProjectName -o "$sourcePath\$wpfProjectName"
 dotnet new blazorserver -n $blazorProjectName -o "$sourcePath\$blazorProjectName"
 dotnet new classlib -n $dtoProjectName -o "$sourcePath\$dtoProjectName"
@@ -41,12 +45,12 @@ Write-Output "Add projects to the solution"
 # Add the projects to the solution
 # dotnet sln "$sourcePath\$solutionName.sln" add myapp\myapp.csproj
 dotnet sln "$sourcePath$solutionName.sln" add `
+    "$sourcePath\$consoleProjectName\$consoleProjectName.csproj" `
     "$sourcePath\$dataProjectName\$dataProjectName.csproj" `
     "$sourcePath\$repositoryProjectName\$repositoryProjectName.csproj" `
     "$sourcePath\$libraryProjectName\$libraryProjectName.csproj" `
     "$sourcePath\$apiProjectName\$apiProjectName.csproj" `
     "$sourcePath\$gatewayProjectName\$gatewayProjectName.csproj" `
-    "$sourcePath\$consoleProjectName\$consoleProjectName.csproj" `
     "$sourcePath\$wpfProjectName\$wpfProjectName.csproj" `
     "$sourcePath\$blazorProjectName\$blazorProjectName.csproj" `
     "$sourcePath\$dtoProjectName\$dtoProjectName.csproj" `
