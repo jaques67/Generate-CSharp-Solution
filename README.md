@@ -2,6 +2,7 @@
 
 ## Description
 This Powershell script is used to generate a C# solution with projects that are often included.
+The script will also create a generic README.md file containing the solution name as a header.
 
 ## Usage
 
